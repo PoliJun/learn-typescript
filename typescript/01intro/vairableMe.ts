@@ -1,4 +1,5 @@
-let greetings: string = "Hello World";
-console.log(greetings);
+const heros = ["thor", "ironman", "spiderman"];
 
-export {};
+let num = 0;
+
+export {}; // This is a module, so it needs to be exported.

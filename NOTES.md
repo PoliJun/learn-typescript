@@ -75,7 +75,7 @@ In this case, TypeScript infers that `x` is a number because you assigned it the
 #### export moudle
 
 ```typescript
-let greetings: string = "Hello World";
+let greetings: string = "Hello World
 console.log(greetings);
 
 export {};
@@ -86,3 +86,49 @@ In TypeScript (and JavaScript modules), the `export {}` statement is used to cre
 Without `export {}`, any `var` declarations in the file could potentially conflict with variables of the same name in the global scope. By using `export {}`, you're telling TypeScript that this file is a module, so all its declarations are scoped to the module, not the global scope.
 
 However, in your provided code snippet, since there are no variables, functions, or classes declared, the `export {}` statement doesn't have any practical effect. It's likely there for future use or as a placeholder.
+
+### Abuse of type
+
+```typescript
+let userId: number;
+number = 5;
+```
+
+This is not a good practice. It is better to use `let userId = 5` and let TypeScript infer the type.
+
+## Function Defined
+
+```typescript
+function add(a: number, b: number): number {
+    return a + b;
+}
+```
+
+```typescript
+const add = (a: number, b: number): number => {
+    return a + b;
+};
+```
+
+### Typescript is smart enough to infer the type of parameters in map
+
+```typescript
+const numbers = [1, 2, 3, 4, 5];
+numbers.map((num) => {
+    return num * 2;
+});
+```
+
+In this case, `num` is inferred to be a number.
+
+### `never`
+
+Check Documentation [here](https://www.typescriptlang.org/docs/handbook/2/functions.html#never)
+
+The never type represents values which are never observed. In a return type, this means that the function throws an exception or terminates execution of the program.
+
+```typescript
+function throwError(message: string): never {
+    throw new Error(message);
+}
+```

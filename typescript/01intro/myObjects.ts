@@ -1,10 +1,12 @@
-type User = {
-    name: string;
-    age: number;
-    isActive: boolean;
+type cardDate = {
+    month: number;
+    year: number;
+};
+type cardNumber = {
+    cardNumber: number;
 };
 
-function createUser(user: User) {}
+type cardDetails = cardDate & cardNumber;
 
-createUser({ name: "John", age: 30, isActive: true });
+// createUser(myUser);
 export {};

@@ -1,17 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var User = {
+var myUser = {
+    _id: "123",
     name: "John",
     age: 30,
-    email: "example@example.com",
+    isActive: true,
 };
-function createAddr(_a) {
-    var name = _a.name, location = _a.location, zip = _a.zip;
-}
-function createCourse() {
-    return { name: "math", price: 100 };
-}
-createCourse();
-createAddr({ name: "John", location: "123 Main St", zip: 12345 });
-var newAddr = { name: "John", location: "123 Main St", zip: 12345, email: "e@ex.com" };
-createAddr(newAddr);
+myUser.age = 31;
+// myUser._id = "321"; // Cannot assign to '_id' because it is a read-only property.ts(2540)
+function createUser(user) { }
+createUser(myUser);

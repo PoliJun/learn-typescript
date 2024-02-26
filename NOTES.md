@@ -184,3 +184,52 @@ function createUser(user: User) {}
 createUser({ name: "John", age: 30, isActive: true });
 export {};
 ```
+
+## `readonly` modifier
+
+```typescript
+type User = {
+    readonly _id: string; // in case of MongoDB
+    name: string;
+    age: number;
+    isActive: boolean;
+};
+let myUser: User = {
+    _id: "123",
+    name: "John",
+    age: 30,
+    isActive: true,
+};
+myUser.age = 31;
+myUser._id = "321"; // Cannot assign to '_id' because it is a read-only property.ts(2540)
+```
+
+## Optional Properties
+
+```typescript
+type User = {
+    name: string;
+    age?: number;
+};
+let user: User = {
+    name: "John",
+};
+user.age = 30;
+```
+
+## Intersection Types
+
+interfaces allowed us to build up new types from other types by extending them. TypeScript provides another construct called intersection types that is mainly used to combine existing object types.
+
+An intersection type is defined using the & operator.
+
+```typescript
+interface Colorful {
+    color: string;
+}
+interface Circle {
+    radius: number;
+}
+
+type ColorfulCircle = Colorful & Circle;
+```

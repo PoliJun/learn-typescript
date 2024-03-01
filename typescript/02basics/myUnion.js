@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var score = 33;
 score = "thirty three";
 score = 33;
@@ -14,5 +16,6 @@ function printId(id) {
 }
 printId("101"); // 101
 printId(101); // 104
-var data = [101, "101", 102, "102"];
-// export {};
+var data1 = [101, "101", 102, "102"];
+var data2 = ["101", "102", "103", "104"];
+var seatAllotment = "middle";

@@ -142,15 +142,7 @@ const User = {
     email: "example@example.com",
 };
 
-function createAddr({
-    name,
-    location,
-    zip,
-}: {
-    name: string;
-    location: string;
-    zip: number;
-}) {}
+function createAddr({ name, location, zip }: { name: string; location: string; zip: number }) {}
 
 function createCourse(): { name: string; price: number } {
     return { name: "math", price: 100 };
@@ -262,7 +254,7 @@ score = 33;
 
 console.log(score);
 
-function printId(id: number | string | any) {
+function printId(id: number | string) {
     if (typeof id === "string") {
         // In this block, id is of type 'string'
         console.log(id.toUpperCase());
@@ -273,5 +265,76 @@ function printId(id: number | string | any) {
 }
 printId("101"); // 101
 printId(101); // 104
-export {};
+
+const data1: (number | string)[] = [101, "101", 102, "102"];
+const data2: number[] | string[] = ["101", "102", "103", "104"];
+
+let seatAllotment: "asile" | "middle" | "window" | "emergency" = "middle";
+```
+
+## Tuple
+
+```typescript
+// This is an
+const user: (string | number)[] = [1, "Rajat", 25, "Developer", "Gurgaon", "India"];
+
+// Order matters
+const user1: [string, number, string, boolean, string] = ["Rajat", 25, "Developer", true, "India"];
+
+// This should not occur in your code. But ts allows call this method on a tuple.
+// Tuple is an array with fixed number of elements and fixed types.
+user1.push("Gurgaon");
+console.log(user1);
+
+export {}; // This is to avoid TS error: Cannot redeclare block-scoped variable 'user'.ts(2451)
+```
+
+## Enums
+
+```typescript
+/* const */ enum SeatChoice {
+    WINDOW,
+    AISLE,
+    MIDDLE,
+}
+/* const */ enum SeatChoice2 {
+    WINDOW = "Window",
+    AISLE = 20,
+    MIDDLE = 30,
+}
+const mySeat: SeatChoice = SeatChoice.WINDOW;
+const mySeat2: SeatChoice2 = SeatChoice2.WINDOW;
+
+console.log(mySeat); // 0
+console.log(mySeat2); // Window
+```
+
+compiled to
+
+```javascript
+/* const */ var SeatChoice;
+(function (SeatChoice) {
+    SeatChoice[(SeatChoice["WINDOW"] = 0)] = "WINDOW";
+    SeatChoice[(SeatChoice["AISLE"] = 1)] = "AISLE";
+    SeatChoice[(SeatChoice["MIDDLE"] = 2)] = "MIDDLE";
+})(SeatChoice || (SeatChoice = {}));
+/* const */ var SeatChoice2;
+(function (SeatChoice2) {
+    SeatChoice2["WINDOW"] = "Window";
+    SeatChoice2[(SeatChoice2["AISLE"] = 20)] = "AISLE";
+    SeatChoice2[(SeatChoice2["MIDDLE"] = 30)] = "MIDDLE";
+})(SeatChoice2 || (SeatChoice2 = {}));
+var mySeat = SeatChoice.WINDOW;
+var mySeat2 = SeatChoice2.WINDOW;
+console.log(mySeat); // 0
+console.log(mySeat2); // Window
+```
+
+uncomment `const` and see the compiled code.
+
+```javascript
+var mySeat = 0; /* SeatChoice.WINDOW */
+var mySeat2 = "Window"; /* SeatChoice2.WINDOW */
+console.log(mySeat); // 0
+console.log(mySeat2); // Window
 ```

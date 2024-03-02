@@ -372,7 +372,8 @@ const hitesh: User = {
 console.log(hitesh.getCoupon("anyThing"));
 ```
 
-### [Differences Between Type Aliases and Interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)  
+### [Differences Between Type Aliases and Interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)
+
 Interface Type
 
 Extending an interface
@@ -497,5 +498,21 @@ type Window = {
     </tbody>
 </table>
 
-## Serialization
+## Classes
 
+```typescript
+class User {
+    email: string;
+    name: string;
+    readonly city: string = "";
+    address: string;
+    constructor(email: string, name: string, address: string = "") {
+        this.email = email;
+        this.name = name;
+        this.address = address;
+    }
+}
+
+const hitesh = new User("e@e.com", "Hitesh", "Delhi");
+console.log(hitesh);
+```

@@ -23,6 +23,10 @@ const hitesh: User = {
     getCoupon: (name: "myname" /* this is not recommended */) => {
         return `Coupon code: ${name}, Type: ${typeof name}`; // Coupon code: myname, Type: string
     },
+    githubToken: "#######",
 };
-
-console.log(hitesh.getCoupon("anyThing"));
+//You can redefine the interface with the same name. 
+interface User {
+    githubToken?: string;
+}
+console.log(hitesh);

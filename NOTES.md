@@ -371,3 +371,128 @@ const hitesh: User = {
 
 console.log(hitesh.getCoupon("anyThing"));
 ```
+
+### [Differences Between Type Aliases and Interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)  
+Interface Type
+
+Extending an interface
+
+```typescript
+interface Animal {
+    name: string;
+}
+
+interface Bear extends Animal {
+    honey: boolean;
+}
+
+const bear = getBear();
+bear.name;
+bear.honey;
+```
+
+Extending a type via intersections
+
+```typescript
+type Animal = {
+    name: string;
+};
+
+type Bear = Animal & {
+    honey: boolean;
+};
+
+const bear = getBear();
+bear.name;
+bear.honey;
+```
+
+Adding new fields to an existing interface
+
+```typescript
+interface Window {
+    title: string;
+}
+
+interface Window {
+    ts: TypeScriptAPI;
+}
+
+const src = 'const a = "Hello World"';
+window.ts.transpileModule(src, {});
+```
+
+A type cannot be changed after being created
+
+```typescript
+type Window = {
+    title: string;
+};
+
+type Window = {
+    ts: TypeScriptAPI;
+};
+// Error: Duplicate identifier 'Window'.
+```
+
+<table class="full-width-table">
+  <tbody>
+    <tr>
+      <th><code>Interface</code></th>
+      <th><code>Type</code></th>
+    </tr>
+    <tr>
+      <td>
+        <p>Extending an interface</p>
+        <code><pre>interface Animal {
+  name: string;
+}<br>
+interface Bear extends Animal {
+  honey: boolean;
+}<br>
+const bear = getBear();
+bear.name;
+bear.honey;
+        </pre></code>
+      </td>
+      <td>
+        <p>Extending a type via intersections</p>
+        <code><pre>type Animal = {
+  name: string;
+}<br>
+type Bear = Animal &amp; {
+  honey: boolean;
+}<br>
+const bear = getBear();
+bear.name;
+bear.honey;
+        </pre></code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>Adding new fields to an existing interface</p>
+        <code><pre>interface Window {
+  title: string;
+}<br>
+interface Window {
+  ts: TypeScriptAPI;
+}<br>
+const src = 'const a = "Hello World"';
+window.ts.transpileModule(src, {});
+        </pre></code>
+      </td>
+      <td>
+        <p>A type cannot be changed after being created</p>
+        <code><pre>type Window = {
+  title: string;
+}<br>
+type Window = {
+  ts: TypeScriptAPI;
+}<br>
+<span style="color: rgb(163, 21, 21); --darkreader-inline-color: #ea6060;" data-darkreader-inline-color=""> // Error: Duplicate identifier 'Window'.</span><br>
+        </pre></code>
+      </td>
+    </tr>
+    </tbody>
+</table>

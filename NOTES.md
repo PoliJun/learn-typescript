@@ -338,3 +338,36 @@ var mySeat2 = "Window"; /* SeatChoice2.WINDOW */
 console.log(mySeat); // 0
 console.log(mySeat2); // Window
 ```
+
+## Interfaces
+
+```typescript
+interface User {
+    readonly dbId: number;
+    name: string;
+    age: number;
+    email: string;
+    address?: string;
+    endTrial: () => string;
+    startTrial(): string;
+    getCoupon(couponName: string): string;
+}
+
+const hitesh: User = {
+    dbId: 1,
+    name: "Hitesh",
+    age: 21,
+    email: "example@example.com",
+    startTrial: () => "Trial Started",
+    endTrial: () => {
+        return "Trial Ended";
+    },
+    // The parameter name can be anything. It is just a placeholder.
+    // But the type should be string.
+    getCoupon: (name: "myname" /* this is not recommended */) => {
+        return `Coupon code: ${name}, Type: ${typeof name}`; // Coupon code: myname, Type: string
+    },
+};
+
+console.log(hitesh.getCoupon("anyThing"));
+```

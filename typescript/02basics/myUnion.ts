@@ -21,6 +21,7 @@ printId(101); // 104
 const data1: (number | string)[] = [101, "101", 102, "102"];
 const data2: number[] | string[] = ["101", "102", "103", "104"];
 
-let seatAllotment: "asile" | "middle" | "window" | "emergency" = "middle";
+let seatAllotment: "asile" | "middle" | "window" | "emergency" = "asile";
+console.log(seatAllotment); // asile
 
 export {}; // This is to avoid TS error: Cannot redeclare block-scoped variable 'score'.ts(2451)

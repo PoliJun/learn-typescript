@@ -20,7 +20,7 @@ const hitesh: User = {
     },
     // The parameter name can be anything. It is just a placeholder.
     // But the type should be string.
-    getCoupon: (name: "myname" /* this is not recommended */) => {
+    getCoupon: (name: string /* this is not recommended */) => {
         return `Coupon code: ${name}, Type: ${typeof name}`; // Coupon code: myname, Type: string
     },
     githubToken: "#######",

@@ -496,3 +496,6 @@ type Window = {
     </tr>
     </tbody>
 </table>
+
+## Serialization
+

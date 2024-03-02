@@ -7,4 +7,4 @@ let user = { name: "John", age: 30 };
 console.log("Hello World");
 // Property 'email' does not exist on type '{ name: string; age: number; }'.ts(2339)
 // any
-console.log(user.email);
+// console.log(user.email);

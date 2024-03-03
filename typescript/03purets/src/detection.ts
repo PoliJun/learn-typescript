@@ -14,10 +14,29 @@ function detectType(val: number | string) {
     return val + 3;
 }
 
-function provideId(id:string|null){
+function provideId(id: string | null) {
     if (!id) {
         console.log("No id provided");
         return;
     }
-    id.toLowerCase();
+    if (typeof id === "string") {
+        return id.toLowerCase();
+    }
+    // id.toLowerCase();
+}
+interface User {
+    name: string;
+    email: string;
+}
+interface Admin {
+    name: string;
+    email: string;
+    role: string;
+}
+
+function isAdmin(account:User | Admin){
+    if('role' in account){
+        console.log(account.role);
+    }
+    
 }

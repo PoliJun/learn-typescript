@@ -757,6 +757,8 @@ const myArrow = (id: number): string => {
 
 [Document](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#handbook-content)
 
+### Type Guards
+
 ```typescript
 let myString = "Hello World";
 let myNum = 22;
@@ -780,5 +782,40 @@ function provideId(id: string | null) {
         return;
     }
     id.toLowerCase();
+}
+```
+
+typeof
+type guards
+
+As we’ve seen, JavaScript supports a typeof operator which can give very basic information about the type of values we have at runtime. TypeScript expects this to return a certain set of strings:
+
+-   "string"
+-   "number"
+-   "bigint"
+-   "boolean"
+-   "symbol"
+-   "undefined"
+-   "object"
+-   "function"
+
+### `in` operator narrowing
+
+```typescript
+interface User {
+    name: string;
+    email: string;
+}
+interface Admin {
+    name: string;
+    email: string;
+    role: string;
+}
+
+function isAdmin(account:User | Admin){
+    if('role' in account){
+        console.log(account.role);
+    }
+    
 }
 ```

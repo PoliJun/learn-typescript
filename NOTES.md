@@ -516,7 +516,13 @@ class User {
 const hitesh = new User("e@e.com", "Hitesh", "Delhi");
 console.log(hitesh);
 ```
+
 ### Modifiers
+
+-   public
+-   private
+-   protected
+-   readonly
 
 ```typescript
 class User {
@@ -552,18 +558,6 @@ console.log(hitesh);
 ### Getters and Setters
 
 ```typescript
-// class User {
-//     public email: string;
-//     private name: string; // private modifier in javascript is not supported, "#" is used in javascript
-//     readonly city: string = "";
-//     address: string;
-//     constructor(email: string, name: string, address: string = "") {
-//         this.email = email;
-//         this.name = name;
-//         this.address = address;
-//     }
-// }
-
 class User {
     private _courseCount = 1;
     readonly city: string = "Toronto";
@@ -595,4 +589,32 @@ console.log(hitesh.courseCount); // getter
 hitesh.courseCount = 5; // setter
 console.log(hitesh.courseCount); // getter
 console.log(hitesh);
+```
+
+## Implementing Interfaces
+
+```typescript
+interface TakePhoto {
+    cameraMode: string;
+    filter: string;
+    burst: number;
+}
+interface Story {
+    createStory(): void;
+}
+class Instagram implements TakePhoto {
+    constructor(public cameraMode: string, public filter: string, public burst: number) {}
+}
+
+class Youtube implements TakePhoto, Story {
+    constructor(
+        public cameraMode: string,
+        public filter: string,
+        public burst: number,
+        public videoMode: string, // You can add new new properties, but not less than the interface
+    ) {}
+    createStory(): void {
+        console.log("Creating story");
+    }
+}
 ```

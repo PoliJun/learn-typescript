@@ -1,17 +1,5 @@
-// class User {
-//     public email: string;
-//     private name: string; // private modifier in javascript is not supported, "#" is used in javascript
-//     readonly city: string = "";
-//     address: string;
-//     constructor(email: string, name: string, address: string = "") {
-//         this.email = email;
-//         this.name = name;
-//         this.address = address;
-//     }
-// }
-
 class User {
-    private _courseCount = 1;
+    protected _courseCount = 1;
     readonly city: string = "Toronto";
     constructor(public email: string, public name: string, private _userId: string) {}
 
@@ -41,3 +29,16 @@ console.log(hitesh.courseCount); // getter
 hitesh.courseCount = 5; // setter
 console.log(hitesh.courseCount); // getter
 console.log(hitesh);
+
+
+class SubUser extends User{
+    isFamily: boolean= true;
+    changeCourseCount(){
+        this._courseCount = 10;
+    }
+   
+}
+
+const subUser = new SubUser("e@e.com", "Hitesh", "####");
+subUser.changeCourseCount();
+console.log(subUser);

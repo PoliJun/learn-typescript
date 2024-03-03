@@ -849,3 +849,109 @@ let myPet: Fish = {
 ```
 
 `pet is Fish` is a type predicate.
+
+### Discriminated unions
+
+```typescript
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+interface Square {
+    kind: "square";
+    side: number;
+}
+
+interface Rectangle {
+    kind: "rectangle";
+    width: number;
+    height: number;
+}
+type Shape = Circle | Square | Rectangle;
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+        case "square":
+            return shape.side * shape.side;
+        case "rectangle":
+            return shape.width * shape.height;
+        // Exhaustiveness checking, this is necessary.
+        default:
+            const _exhaustiveCheck: never = shape;
+            return _exhaustiveCheck;
+    }
+}
+```
+
+> The never type is assignable to every type; however, no type is assignable to never (except never itself).
+
+There is a little more complex example in the documentation.
+[Discriminated unions](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions
+
+```typescript
+interface Shape {
+    kind: "circle" | "square";
+    radius?: number;
+    sideLength?: number;
+}
+```
+
+This is not a good practice. Because:
+
+```typescript
+interface Shape {
+    kind: "circle" | "square" | "rectangle";
+    radius?: number;
+    side?: number;
+    width?: number;
+    height?: number;
+}
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "circle":
+            return Math.PI * shape.radius! ** 2;
+        case "square":
+            return shape.side! * shape.side!;
+        case "rectangle":
+            return shape.width! * shape.height!;
+        default:
+            const _exhaustiveCheck: never = shape.kind;
+            return _exhaustiveCheck;
+    }
+}
+```
+
+> You need non null and not undefined checks. The property `kind` matching doesn't assure other properties are present.
+
+**Fix**:  
+The `!` operator in TypeScript is a non-null assertion operator. It's a way to tell the compiler "this expression can't be null or undefined here, so don't check for that". However, it's generally better to perform actual runtime checks to ensure that values are not `undefined`.
+
+Here's how you can add undefined checks to your `getArea` function:
+
+```typescript
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "circle":
+            if (shape.radius === undefined) {
+                throw new Error("Radius is undefined for circle");
+            }
+            return Math.PI * shape.radius ** 2;
+        case "square":
+            if (shape.side === undefined) {
+                throw new Error("Side is undefined for square");
+            }
+            return shape.side * shape.side;
+        case "rectangle":
+            if (shape.width === undefined || shape.height === undefined) {
+                throw new Error("Width or height is undefined for rectangle");
+            }
+            return shape.width * shape.height;
+        default:
+            const _exhaustiveCheck: never = shape.kind;
+            return _exhaustiveCheck;
+    }
+}
+```
+
+In this version of the function, if `radius`, `side`, `width`, or `height` is `undefined`, an error will be thrown. This makes the function safer to use, because it ensures that the necessary properties are defined before trying to use them.

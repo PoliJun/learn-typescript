@@ -812,10 +812,40 @@ interface Admin {
     role: string;
 }
 
-function isAdmin(account:User | Admin){
-    if('role' in account){
+function isAdmin(account: User | Admin) {
+    if ("role" in account) {
         console.log(account.role);
     }
-    
 }
 ```
+
+### `instanceof` narrowing
+
+```typescript
+type Fish = {
+    swim: () => void;
+};
+
+type Bird = {
+    fly: () => void;
+};
+function isFish(pet: Fish | Bird | string): pet is Fish {
+    return (pet as Fish).swim() !== undefined;
+}
+function getFood(pet: Fish | Bird | string) {
+    if (isFish(pet)) {
+        pet; // type is Fish
+        return "Fish";
+    } else {
+        pet; // type is string | Bird
+        return "Bird";
+    }
+}
+let myPet: Fish = {
+    swim() {
+        console.log("swimming");
+    },
+};
+```
+
+`pet is Fish` is a type predicate.

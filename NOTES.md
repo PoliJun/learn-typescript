@@ -618,3 +618,55 @@ class Youtube implements TakePhoto, Story {
     }
 }
 ```
+
+## Abstract Classes
+
+```typescript
+abstract class TakePhoto {
+    constructor(cameraMode: string, filter: string, burst: number) {}
+}
+
+const hc = new TakePhoto("a", "b", 1); // Error: Cannot create an instance of an abstract class.
+```
+
+This is OK
+```typescript
+abstract class TakePhoto {
+    constructor(cameraMode: string, filter: string, burst: number) {}
+}
+
+
+class Instagram extends TakePhoto {
+    constructor(public cameraMode: string, public filter: string, public burst: number) {
+        super(cameraMode, filter, burst);
+    }
+}
+
+const hc = new Instagram("a", "b", 1); 
+```
+
+Meaning of abstract class is that it can have abstract methods and non-abstract methods
+```typescript
+abstract class TakePhoto {
+    constructor(cameraMode: string, filter: string, burst: number) {}
+
+    abstract getSepia(): void;
+
+    // Meaning of abstract class is that it can have abstract methods and non-abstract methods
+    getRealTime(): number {
+        return 0;
+    }
+}
+
+class Instagram extends TakePhoto {
+    constructor(public cameraMode: string, public filter: string, public burst: number) {
+        super(cameraMode, filter, burst);
+    }
+    getSepia(): void {
+        console.log("Applying sepia filter...");
+        // Implementation logic for applying sepia filter goes here
+    }
+}
+
+const hc = new Instagram("a", "b", 1);
+```

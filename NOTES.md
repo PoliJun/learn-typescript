@@ -630,11 +630,11 @@ const hc = new TakePhoto("a", "b", 1); // Error: Cannot create an instance of an
 ```
 
 This is OK
+
 ```typescript
 abstract class TakePhoto {
     constructor(cameraMode: string, filter: string, burst: number) {}
 }
-
 
 class Instagram extends TakePhoto {
     constructor(public cameraMode: string, public filter: string, public burst: number) {
@@ -642,10 +642,11 @@ class Instagram extends TakePhoto {
     }
 }
 
-const hc = new Instagram("a", "b", 1); 
+const hc = new Instagram("a", "b", 1);
 ```
 
 Meaning of abstract class is that it can have abstract methods and non-abstract methods
+
 ```typescript
 abstract class TakePhoto {
     constructor(cameraMode: string, filter: string, burst: number) {}
@@ -669,4 +670,31 @@ class Instagram extends TakePhoto {
 }
 
 const hc = new Instagram("a", "b", 1);
+```
+
+## Generics
+
+```typescript
+// Generics is already a feature in TypeScript.
+const score: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const name: Array<string> = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
+
+function indentityOne(val: boolean | number | string): boolean | number | string {
+    return val;
+}
+function indentityTwo(val: any): any {
+    return val;
+}
+function indentityThree<T>(val: T): T {
+    return val;
+}
+function indentityFour<T>(val: T[]): T[] {
+    return val;
+}
+interface Bottle {
+    name: string;
+    price: number;
+}
+indentityThree<Bottle>({ name: "water", price: 20 });
+export {};
 ```

@@ -698,3 +698,20 @@ interface Bottle {
 indentityThree<Bottle>({ name: "water", price: 20 });
 export {};
 ```
+## Arrow Functions
+
+```typescript
+function getSearchProducts<T>(products: T[]): T {
+    const myIndex = 3;
+    return products[myIndex];
+}
+
+const getMoreSearchProducts = <T>(products: T[]): T => {
+    const myIndex = 3;
+    return products[myIndex];
+};
+
+const myArrow = (id: number): string => {
+    return `id: ${id}`;
+};
+```
